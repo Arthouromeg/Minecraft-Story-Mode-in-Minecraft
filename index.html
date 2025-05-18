@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minecraft Story mode In Minecraft</title>
+  <link rel="icon" type="image/png" href="32pxAmulet.png" />
+  <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      font-family: 'Minecraft', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 200vw;
+      height: 200vh;
+      transform: translateX(-50%);
+      background-image: url('realback.png');
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: contain;
+      image-rendering: pixelated;
+      filter: brightness(85%);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 150px 20px 2000px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      transition: filter 0.3s ease;
+    }
+
+    h1 {
+      font-size: 48px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    p {
+      font-size: 20px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    #terms-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-box {
+      display: flex;
+      max-width: 90%;
+      max-height: 90%;
+      width: 1245px;
+      height: 712px;
+      background-image: url('bg-portal.png');
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #888;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .popup-image {
+      flex: 1;
+      background-image: url('terms');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .popup-terms {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .popup-terms pre {
+      white-space: pre-wrap;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    button {
+      font-family: 'Minecraft', sans-serif;
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 5px auto;
+      cursor: pointer;
+      background-color: #444;
+      border: 2px solid #999;
+      color: white;
+      transition: background-color 0.2s, opacity 0.2s;
+    }
+
+    button:hover {
+      background-color: #666;
+    }
+
+    #continue-button {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #continue-button.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .blurred {
+      filter: blur(5px);
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="content" id="main-content">
+    <h1>Minecraft <span style="color: rgb(236, 168, 21);">Story Mode</span> In Minecraft</h1>
+    <p>An Add-on for Minecraft: Bedrock Edition.</p>
+    <p>
+<br>
+        Sorry but I aint gonna spoil you the features!
+    </p>
+    <p>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h2><span style="color: rgb(0, 255, 0);">Downloads:</span></h2>
+        <br><br>
+        <a href="https://github.com/Arthouromeg/Minecraft-Story-Mode-in-Minecraft/releases" target="_blank" style="color: cyan; text-decoration: none;">
+            <img src="disquette.png" alt="custom emoji" style="width: 24px; height: 24px; vertical-align: middle;"> Click here to see all releases
+        </a>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <span style="color: rgb(255, 166, 0);">Credits:</span>
+        <br><br>
+        - ArthurTheBG: Most of the things
+        <br>
+        <br>
+        - The Decayed Team: Some models and assets
+        <br>
+        Come check their website!
+        <br>
+        <br>
+        <a href="https://www.decayed-team.com" target="_blank" style="color: cyan; text-decoration: none;">
+            Decayed Team Website
+        </a>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <span style="color: rgb(255, 0, 242);">Socials:</span>
+        <br>
+        <br>
+        <a href="https://www.youtube.com/@ARTHURTHEBG" target="_blank" style="color: rgb(255, 0, 0); text-decoration: none;">
+            Youtube
+        </a>
+        <br>
+        <br>
+        <a href="https://discord.gg/th5nJ2Q8Ve" target="_blank" style="color: rgb(57, 76, 240); text-decoration: none;">
+            Discord
+        </a>
+    </p>
+  </div>
+
+  <!-- Terms Popup -->
+  <div id="terms-popup">
+    <div class="popup-box">
+      <div class="popup-image"></div>
+      <div class="popup-terms">
+        <pre>
+TERMS OF USE
+
+By using this add-on, you agree not to reuse, redistribute, or modify any assets or code without proper permission from the original authors (see credits for details).
+
+Unauthorized use of any part of this add-on may lead to legal action, including takedown requests or copyright complaints in accordance with applicable law.
+
+Respect creators — we worked hard on this!
+        </pre>
+        <button id="accept-button">Accept Terms</button>
+        <button id="continue-button">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const acceptBtn = document.getElementById('accept-button');
+    const continueBtn = document.getElementById('continue-button');
+    const popup = document.getElementById('terms-popup');
+    const content = document.getElementById('main-content');
+
+    let accepted = false;
+
+    acceptBtn.addEventListener('click', () => {
+      accepted = true;
+      continueBtn.classList.add('enabled');
+      continueBtn.disabled = false;
+    });
+
+    continueBtn.addEventListener('click', () => {
+      if (accepted) {
+        popup.style.display = 'none';
+        content.classList.remove('blurred');
+      }
+    });
+
+    content.classList.add('blurred');
+  </script>
+</body>
+</html>
